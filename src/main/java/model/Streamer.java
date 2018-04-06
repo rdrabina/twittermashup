@@ -21,6 +21,11 @@ public class Streamer extends AbstractActor {
             this.keyword=keyword;
         }
     }
+
+    static public class Kill {
+        public Kill() { }
+    }
+
     //#model.Streamer-messages
 
     //#Configuration of twitter stream
@@ -46,6 +51,10 @@ public class Streamer extends AbstractActor {
                     twitterStream.addListener(new BasicListener());
                     twitterStream.filter(new FilterQuery().track(sbk.keyword));
                 })
+                .match(Kill.class, () -> {
+
+                })
+                .match()
                 .build();
     }
 
@@ -56,19 +65,13 @@ public class Streamer extends AbstractActor {
             System.out.println("@" + status.getUser().getScreenName() + " - ");
         }
 
-        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-        }
+        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 
-        public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-        }
+        public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
 
-        public void onScrubGeo(long l, long l1) {
+        public void onScrubGeo(long l, long l1) {}
 
-        }
-
-        public void onStallWarning(StallWarning stallWarning) {
-
-        }
+        public void onStallWarning(StallWarning stallWarning) {}
 
         public void onException(Exception ex) {
             ex.printStackTrace();
