@@ -21,7 +21,7 @@ public class Main {
             //#create-actors
 
             //#main-send-messages
-            streamerActor.tell(new Streamer.StreamByKeyword("facebook"), ActorRef.noSender());
+            streamerActor.tell(new Streamer.StreamByKeyword("poland"), ActorRef.noSender());
             //#main-send-messages
 
 
