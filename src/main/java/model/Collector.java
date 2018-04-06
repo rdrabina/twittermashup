@@ -24,7 +24,9 @@ public class Collector extends AbstractActor {
         }
     }
 
-    static public class UpdateQueu
+    static public class UpdateQueue{
+        public UpdateQueue(){}
+    }
     //#printer-messages
 
 
@@ -40,7 +42,13 @@ public class Collector extends AbstractActor {
                     queue.add(new TweetInfo(tweet.key,tweet.timeMarker));
                     System.out.println("Adding tweet to query");
                 })
-                .match()
+                .match(UpdateQueue.class, x -> {
+
+                    while(queue.peek().shouldRemove()){
+                        TweetInfo ti = queue.poll();
+                        System.out.println("Removing tweet info: "+ti.key);
+                    }
+                })
                 .build();
     }
 
