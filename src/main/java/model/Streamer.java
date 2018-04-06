@@ -15,7 +15,7 @@ public class Streamer extends AbstractActor {
     //#model.Streamer-messages
 
     static public class StreamByKeyword {
-        public final String keyword;
+        private final String keyword;
 
         public StreamByKeyword(String keyword) {
             this.keyword=keyword;
@@ -46,15 +46,14 @@ public class Streamer extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(StreamByKeyword.class, sbk -> {
-                    System.out.println("Im here");
                     TwitterStream twitterStream = new TwitterStreamFactory(configuration).getInstance();
                     twitterStream.addListener(new BasicListener());
                     twitterStream.filter(new FilterQuery().track(sbk.keyword));
                 })
-                .match(Kill.class, () -> {
+                .match(Kill.class, x -> {
 
                 })
-                .match()
+
                 .build();
     }
 
@@ -62,7 +61,7 @@ public class Streamer extends AbstractActor {
     private class BasicListener implements StatusListener{
         public void onStatus(Status status) {
 
-            System.out.println("@" + status.getUser().getScreenName() + " - ");
+           System.out.println("@" + status.getUser().getScreenName()+" "+status.getText());
         }
 
         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}

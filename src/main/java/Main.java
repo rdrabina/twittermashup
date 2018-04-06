@@ -7,10 +7,12 @@ import java.io.IOException;
 import model.Collector;
 import model.Streamer;
 
+import static java.lang.Thread.sleep;
+
 public class Main {
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("System");
-        try {
+
             //#create-actors
 
             final ActorRef streamerActor =
@@ -22,10 +24,12 @@ public class Main {
             streamerActor.tell(new Streamer.StreamByKeyword("facebook"), ActorRef.noSender());
             //#main-send-messages
 
-            System.out.println(">>> Press ENTER to exit <<<");
+
+        try {
             System.in.read();
 
         } catch (IOException ioe) {
+            system.stop(streamerActor);
         } finally {
             system.terminate();
         }
