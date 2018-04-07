@@ -5,11 +5,6 @@ import twitter4j.*;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9afcc0d0fae646ae27973ca032316f2371355d9e
 public class Streamer extends AbstractActor {
 
     static public Props props() {

@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 public class Collector extends AbstractActor {
 
     static public Props props() {
-        return Props.create(Collector.class, () -> new Collector());
+        return Props.create(Collector.class, () -> new Collector(1));
     }
 
     //#collector-messages
